@@ -22,7 +22,7 @@ steps:
   - '-c'
   - | 
       echo "***********************"
-      echo "$BRANCH_NAME"
+      echo "$_BRANCH_NAME"
       echo "***********************"
 
 - id: 'tf init'
@@ -31,8 +31,8 @@ steps:
   args: 
   - '-c'
   - |
-      if [ -d "terraform/$BRANCH_NAME/" ]; then
-        cd terraform/$BRANCH_NAME
+      if [ -d "terraform/$_BRANCH_NAME/" ]; then
+        cd terraform/$_BRANCH_NAME
         terraform init
       else
         for dir in terraform/*/
@@ -56,8 +56,8 @@ steps:
   args: 
   - '-c'
   - | 
-      if [ -d "terraform/$BRANCH_NAME/" ]; then
-        cd terraform/$BRANCH_NAME
+      if [ -d "terraform/$_BRANCH_NAME/" ]; then
+        cd terraform/$_BRANCH_NAME
         terraform plan
       else
         for dir in terraform/*/
@@ -83,11 +83,11 @@ steps:
   - '-c'
   - | 
       if [ -d "terraform/$BRANCH_NAME/" ]; then
-        cd terraform/$BRANCH_NAME      
+        cd terraform/$_BRANCH_NAME      
         terraform apply -auto-approve
       else
         echo "***************************** SKIPPING APPLYING *******************************"
-        echo "Branch '$BRANCH_NAME' does not represent an oficial environment."
+        echo "Branch '$_BRANCH_NAME' does not represent an oficial environment."
         echo "*******************************************************************************"
       fi
 # [END tf-apply]
